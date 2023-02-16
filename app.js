@@ -7,7 +7,6 @@ const noticesRouter = require("./src/routes/api/notices");
 const {errorHandler} = require('./src/helpers/apiHelpers')
 
 // const contactsRouter = require("./routes/api/contacts");
-const noticesRouter = require("./src/routes/api/notices");
 
 const app = express();
 
