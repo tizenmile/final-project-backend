@@ -6,6 +6,8 @@ const app = require("./app");
 
 const { MONGO_URL, PORT } = process.env;
 
+mongoose.set('strictQuery', true);
+
 mongoose
   .connect(MONGO_URL, {
     useNewUrlParser: true,
