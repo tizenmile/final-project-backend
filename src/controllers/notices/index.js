@@ -1,3 +1,5 @@
-const getAllNoticeController = require("./getAllNoticeController");
+const { getNoticesByCategoryController } = require('./getNoticesByCategory')
 
-module.exports = { getAllNoticeController };
+module.exports = {
+    getNoticesByCategoryController
+}
