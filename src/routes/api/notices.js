@@ -8,3 +8,4 @@ router.get('/:category', asyncWrapper(noticesControllers.getNoticesByCategoryCon
 
 
 module.exports = router
+
