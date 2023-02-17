@@ -19,7 +19,17 @@ class UpdatedFavoriteStatusError extends ApiFindPetError {
     }
 }
 
-class ValidationError extends ApiFindPetError {
+//class ValidationError extends ApiFindPetError {
+//  }
+
+class Conflict extends ApiFindPetError {
+  constructor(message) {
+    super(message);
+    this.status = 409;
+  }
+}
+  
+class NotFoundError extends ApiFindPetError {
     constructor(message) {
         super(message),
         this.status = 400
@@ -36,7 +46,9 @@ class HttpError extends ApiFindPetError {
 module.exports = {
     ApiFindPetError,
     NotFoundError,
-    ValidationError,
+//    ValidationError,
     UpdatedFavoriteStatusError,
-    HttpError
+    HttpError,
+    Conflict,
+    NotFoundError
 }

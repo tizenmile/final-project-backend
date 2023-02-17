@@ -11,8 +11,5 @@ router.put('/add-to-fav/:id', authMiddleware, asyncWrapper(noticesControllers.ad
 router.put('/del-from-fav/:id', authMiddleware, asyncWrapper(noticesControllers.delNoticeFromFavoriteController))
 router.get('/fav-notice/', authMiddleware, asyncWrapper(noticesControllers.getFavoriteNoticesController))
 
-
-
-
 module.exports = router
 
