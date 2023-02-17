@@ -7,6 +7,7 @@ const asyncWrapper = (controller) => {
 }
 
 const errorHandler = (err, req, res, next) => {
+    console.log(err);
     if (err instanceof ApiFindPetError) {
     return res.status(err.status).json({message: err.message})
 }
