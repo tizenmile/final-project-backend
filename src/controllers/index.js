@@ -1,4 +1,4 @@
 const noticesControllers = require("./notices")
 
-module.exports = noticesController;
+module.exports = noticesControllers;
 
