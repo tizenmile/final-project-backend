@@ -27,6 +27,7 @@ const user = new Schema(
     },
     token: String,
     avatarURL: String,
+    favoriteNotices: Array,
   },
   {
     versionKey: false,
