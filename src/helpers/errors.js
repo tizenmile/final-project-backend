@@ -11,6 +11,13 @@ class ValidationError extends ApiFindPetError {
       this.status = 400;
     }
   }
+
+class Conflict extends ApiFindPetError {
+  constructor(message) {
+    super(message);
+    this.status = 409;
+  }
+}
   
 class NotFoundError extends ApiFindPetError {
     constructor(message) {
@@ -22,5 +29,6 @@ class NotFoundError extends ApiFindPetError {
 module.exports = {
     ApiFindPetError,
     ValidationError,
+    Conflict,
     NotFoundError
 }

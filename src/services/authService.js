@@ -10,7 +10,6 @@ const User = require("./schemas/auth");
 
 const register = async ({email, password, name, city, mobile} , verificationToken) => {
   const avatarURL = gravatar.url(email, {format:'jpg'});
-  console.log(email, password, name, city, mobile, verificationToken, avatarURL);
    
   const user = new User({
     email,
