@@ -1,5 +1,7 @@
-const { getNoticesByCategoryController } = require('./getNoticesByCategory')
+const { getNoticesByCategoryController } = require("./getNoticesByCategory");
+const getOneNoticeByIdController = require("./getOneNoticeById");
 
 module.exports = {
-    getNoticesByCategoryController
-}
+  getNoticesByCategoryController,
+  getOneNoticeByIdController,
+};
