@@ -14,6 +14,6 @@ router.get(
   asyncWrapper(noticesControllers.getOneNoticeByIdController)
 );
 
-// router.get("/:noticeId", noticesControllers.getOneNoticeByIdController);
+router.post("/notice", noticesControllers.addOneNoticeController);
 
 module.exports = router;
