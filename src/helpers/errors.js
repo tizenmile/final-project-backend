@@ -28,13 +28,6 @@ class Conflict extends ApiFindPetError {
     this.status = 409;
   }
 }
-  
-class NotFoundError extends ApiFindPetError {
-    constructor(message) {
-        super(message),
-        this.status = 400
-    }
-}
 
 class HttpError extends ApiFindPetError {
     constructor(status, message) {
