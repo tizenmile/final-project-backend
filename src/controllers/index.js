@@ -1,3 +1,5 @@
-const noticesController = require("./notices");
+const noticesControllers = require("./notices")
 
-module.exports = { noticesController };
+module.exports = {
+    noticesControllers
+}

@@ -20,14 +20,14 @@ const noticeSchema = new mongoose.Schema({
   price: {
       type: String,
   },
-  // userId: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       required: true
-  // },
-  // owner: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'users',
-  //   },
+  userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+  },
+  owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+    },
     category: {
       type: String,
     },
