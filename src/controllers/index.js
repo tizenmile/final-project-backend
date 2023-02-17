@@ -1,3 +1,3 @@
 const noticesController = require("./notices");
 
-module.exports = { noticesController };
+module.exports = noticesController;
