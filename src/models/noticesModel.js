@@ -37,6 +37,7 @@ const noticeSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
 });
 
 const Notice = mongoose.model("Notice", noticeSchema);

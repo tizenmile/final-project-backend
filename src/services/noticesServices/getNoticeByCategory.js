@@ -10,6 +10,7 @@ const getNoticeByCategory = async (categoryName) => {
   return notices;
 };
 
+
 module.exports = {
   getNoticeByCategory,
 };
