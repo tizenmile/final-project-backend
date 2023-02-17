@@ -4,7 +4,7 @@ const router = express.Router();
 // router.use(authMiddleware);
 
 const { asyncWrapper } = require('../../helpers/apiHelpers')
-const {noticesControllers} = require('../../controllers')
+const noticesControllers = require('../../controllers')
 const {authMiddleware} = require('../../middlewares/authMiddleware')
 
 router.get("/:category",asyncWrapper(noticesControllers.getNoticesByCategoryController));
