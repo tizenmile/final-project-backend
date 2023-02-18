@@ -6,7 +6,7 @@ const { User } = require('../../models/usersModel')
 const addNoticeToFavorite = async (noticeId, userId) => {
   console.log(userId, noticeId);
   const updatedUser = await User.findOneAndUpdate(
-    { name: "Yura" },
+    { _id: userId },
     { $addToSet: { favoriteNotices: noticeId } },
     { new: true }
   )
