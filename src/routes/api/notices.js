@@ -29,7 +29,6 @@ router.get(
 );
 router.get(
   "/notice/:noticeId",
-  auth,
   asyncWrapper(noticesControllers.getOneNoticeByIdController)
 );
 
