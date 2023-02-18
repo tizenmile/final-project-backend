@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const { authRouter } = require("./src/routes/api/auth");
 
+const { staticRouter } = require("./src/routes/api/static");
+
 const noticesRouter = require("./src/routes/api/notices");
 const { errorHandler } = require("./src/helpers/apiHelpers");
 // const contactsRouter = require("./routes/api/contacts");
@@ -23,6 +25,7 @@ app.use("/api/auth", authRouter);
 // app.use("/api/notices", noticesRouter);
 // app.use("/api/contacts", contactsRouter);
 app.use("/api/notices", noticesRouter);
+app.use("/api/static", staticRouter);
 
 app.use(errorHandler);
 
