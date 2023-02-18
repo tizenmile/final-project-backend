@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { ValidationError } = require("../helpers/errors");
+const { HttpError } = require("../helpers/errors");
 
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
@@ -22,7 +22,7 @@ const userValidation = (req, res, next) => {
   const { error } = schema.validate(req.body);
 
   if (error) {
-    return next(new ValidationError(error.message));
+    return next(new HttpError(error.message));
   }
 
   next();
