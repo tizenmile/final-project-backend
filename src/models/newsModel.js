@@ -1,4 +1,3 @@
-const Joi = require("joi");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
@@ -6,20 +5,28 @@ const Schema = mongoose.Schema;
 
 const news = new Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
+    news: [
+      {
+        title: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+        date: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     versionKey: false,
   }
 );
 
-const News = mongoose.model("users", news);
+const News = mongoose.model("news", news);
 
 module.exports = { News };
