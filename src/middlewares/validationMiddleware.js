@@ -1,11 +1,10 @@
 const Joi = require("joi");
 const { ValidationError } = require("../helpers/errors");
 
-
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z][0-9a-zA-Z_-]{1,}@(.+)\.(.+)$"))
+      .pattern(new RegExp("^[a-zA-Z][0-9a-zA-Z_-]{1,}@(.+).(.+)$"))
       .email({
         minDomainSegments: 2,
       })
@@ -17,7 +16,7 @@ const userValidation = (req, res, next) => {
       .required(),
     name: Joi.string().required(),
     city: Joi.string().required(),
-    mobile: Joi.string().pattern(new RegExp("^[+]\(380)\[0-9]{9}$")).required(),
+    mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")).required(),
   }).required();
 
   const { error } = schema.validate(req.body);
@@ -29,7 +28,6 @@ const userValidation = (req, res, next) => {
   next();
 };
 
-
-  module.exports = {
-    userValidation,
-  }
+module.exports = {
+  userValidation,
+};
