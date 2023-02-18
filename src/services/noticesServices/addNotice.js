@@ -4,8 +4,9 @@ const { Notice } = require("../../models/noticesModel");
 const User = require("../schemas/auth");
 
 const addNotice = async (req) => {
-  const { token } = req;
-  const candidate = await User.findOne({ verificationToken: token });
+  const { token } = req.user;
+  const candidate = await User.findOne({ token });
+  console.log(candidate);
   const avatarURL = gravatar.url(candidate.email, { format: "jpg" });
   try {
     const notice = new Notice({
