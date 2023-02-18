@@ -7,6 +7,11 @@ const asyncWrapper = (controller) => {
 };
 
 const errorHandler = (err, req, res, next) => {
+  if (err.message.includes("Cast to ObjectId failed for value")) {
+    return res.status(400).json({
+      message: "id is invalid",
+    });
+  }
   if (err instanceof ApiFindPetError) {
     return res.status(err.status).json({ message: err.message });
   }

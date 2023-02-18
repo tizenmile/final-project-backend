@@ -7,3 +7,4 @@ const getNoticesByCategoryController = async (reg, res) => {
 };
 
 module.exports = { getNoticesByCategoryController };
+

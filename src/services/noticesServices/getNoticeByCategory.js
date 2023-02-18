@@ -1,15 +1,16 @@
-const {HttpError } = require('../../helpers/errors')
-const {Notice} = require('../../models/noticesModel')
+const { NotFoundError } = require("../../helpers/errors");
+const { Notice } = require("../../models/noticesModel");
+const { HttpError } = require("../../helpers/HttpError");
 
 const getNoticeByCategory = async (categoryName) => {
- 
-  const notices = await Notice.find({category: categoryName})
+  const notices = await Notice.find({ category: categoryName });
   if (!notices || notices.length === 0) {
-    throw new HttpError(400, 'Notices not found')
-    }
-    return notices
-}
+    throw new NotFoundError("Not found");
+  }
+  return notices;
+};
+
 
 module.exports = {
-    getNoticeByCategory
-}
+  getNoticeByCategory,
+};
