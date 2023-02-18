@@ -27,7 +27,7 @@ const noticeSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    requaried: true,
+    // requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -49,7 +49,7 @@ const noticeSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  coments: {
+  comments: {
     type: String,
     requaried: true,
   },
