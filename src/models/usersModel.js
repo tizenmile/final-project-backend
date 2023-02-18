@@ -47,4 +47,9 @@ const verifyUserSubscriptionSchema = Joi.object({
 
 const User = mongoose.model("users", user);
 
-module.exports = { User, verifyUserSubscriptionSchema };
+const joiLoginSchema = Joi.object({
+  email: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+module.exports = { User, verifyUserSubscriptionSchema, joiLoginSchema };
