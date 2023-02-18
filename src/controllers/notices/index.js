@@ -1,5 +1,5 @@
-const { getOneNoticeByIdController } = require("./getOneNoticeById");
-const { addOneNoticeController } = require("./postNotice");
+const getOneNoticeByIdController = require("./getOneNoticeById");
+const addOneNoticeController = require("./postNotice");
 const { getNoticesByCategoryController } = require("./getNoticesByCategory");
 const { addNoticeToFavoriteController } = require("./addNoticeToFavorite");
 const { delNoticeFromFavoriteController } = require("./delNoticeFromFavorite");
