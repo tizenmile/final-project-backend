@@ -13,11 +13,11 @@ const noticeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  place: {
+  location: {
     type: String,
     required: true,
   },
-  age: {
+  birthDate: {
     type: String,
     required: true,
   },
@@ -26,8 +26,8 @@ const noticeSchema = new mongoose.Schema({
     requaried: true,
   },
   price: {
-    type: String,
-    requaried: true,
+    type: Number,
+    // requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -49,7 +49,7 @@ const noticeSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  coments: {
+  comments: {
     type: String,
     requaried: true,
   },

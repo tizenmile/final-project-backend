@@ -7,7 +7,7 @@ const addOneNoticeController = async (req, res, next) => {
       .status(400)
       .json({ status: 400, message: "operation failed try again" });
   }
-  res.status(200).json({ status: 201, message: "notice created", data });
+  res.status(201).json({ status: 201, message: "notice created", data });
 };
 
 module.exports = addOneNoticeController;

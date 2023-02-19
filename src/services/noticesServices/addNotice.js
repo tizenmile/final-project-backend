@@ -1,17 +1,19 @@
 const gravatar = require("gravatar");
 
 const { Notice } = require("../../models/noticesModel");
-const User = require("../schemas/auth");
 
 const addNotice = async (req) => {
-  const { token } = req.user;
-  const candidate = await User.findOne({ token });
-  console.log(candidate);
-  const avatarURL = gravatar.url(candidate.email, { format: "jpg" });
+  let avatarURL = null;
+  if (!req.file) {
+    avatarURL = gravatar.url(req.user.email, { format: "jpg" });
+  } else {
+    avatarURL = req.file.path;
+  }
+
   try {
     const notice = new Notice({
       ...req.body,
-      userId: candidate._id,
+      userId: req.user._id,
       photo: avatarURL,
     });
     await notice.save();
