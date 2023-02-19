@@ -30,6 +30,20 @@ const userValidation = (req, res, next) => {
   next();
 };
 
+const validationLogin = (req, res, next) => {
+  const joiLoginSchema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+  
+  const { error } = joiLoginSchema.validate(req.body);
+
+    if (error) {
+     return next(new HttpError(error.message));
+    }
+    next();
+};
+
 module.exports = {
-  userValidation,
+  userValidation, validationLogin
 };
