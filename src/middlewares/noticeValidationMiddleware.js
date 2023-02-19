@@ -11,9 +11,8 @@ module.exports = {
       sex: Joi.string().required(),
       price: Joi.number().required().min(1),
       category: Joi.string().required(),
-      photo: Joi.string(),
       favorite: Joi.boolean().required(),
-      coments: Joi.string().required().min(8).max(120),
+      comments: Joi.string().required().min(8).max(120),
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {

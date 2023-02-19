@@ -7,6 +7,7 @@ const { auth } = require("../../middlewares/auth");
 const {
   postNoticeValidation,
 } = require("../../middlewares/noticeValidationMiddleware");
+const uploadCloud = require("../../middlewares/uploadMiddleware");
 
 router.get(
   "/category/:category",
@@ -45,6 +46,7 @@ router.delete(
 router.post(
   "/notice",
   auth,
+  uploadCloud.single("image"),
   postNoticeValidation,
   asyncWrapper(noticesControllers.addOneNoticeController)
 );

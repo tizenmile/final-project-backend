@@ -1,6 +1,6 @@
 const { noticesServices } = require("../../services");
 
-const getOneNoticeById = async (req, res, next) => {
+const getOneNoticeById = async (req, res) => {
   const { noticeId } = req.params;
   const data = await noticesServices.getNoticeById(noticeId);
   if (!data) {
