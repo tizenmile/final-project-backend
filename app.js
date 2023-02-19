@@ -1,6 +1,8 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const { authRouter } = require("./src/routes/api/auth");
 
@@ -26,6 +28,8 @@ app.use("/api/auth", authRouter);
 // app.use("/api/contacts", contactsRouter);
 app.use("/api/notices", noticesRouter);
 app.use("/api/static", staticRouter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
 
