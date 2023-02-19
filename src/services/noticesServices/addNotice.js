@@ -3,7 +3,7 @@ const gravatar = require("gravatar");
 const { Notice } = require("../../models/noticesModel");
 
 const addNotice = async (req) => {
-  let awatarUrl = null;
+  let avatarURL = null;
   if (!req.file) {
     avatarURL = gravatar.url(req.user.email, { format: "jpg" });
   } else {

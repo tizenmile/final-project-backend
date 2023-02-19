@@ -426,6 +426,7 @@
             "description": "The token issued to the current user"
           }
         ],
+
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "New notice",
@@ -433,7 +434,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NoticesRequest"
+                "$ref": "#/components/schemas/CreateNoticesRequest"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoticePhotoRequest"
               }
             }
           }
@@ -571,7 +577,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NoticesResponse"
+                  "$ref": "#/components/schemas/OneNoticesResponse"
                 }
               }
             }
@@ -612,7 +618,13 @@
         "responses": {
           "200": {
             "description": "Successful operation, This notice deleted",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OneNoticesResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Missing header with authorization token.",
@@ -831,6 +843,17 @@
         }
       },
 
+      "CreateNoticePhotoRequest": {
+        "type": "object",
+        "properties": {
+          "Photo": {
+            "type": "string",
+            "description": "Photo",
+            "format": "binary"
+          }
+        }
+      },
+
       "AvatarRequest": {
         "type": "object",
         "properties": {
@@ -982,6 +1005,185 @@
                 }
               }
             }
+          }
+        }
+      },
+
+      "OneNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "notice": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "id",
+                    "example": "63f15d7aa3ef6e831eb8ba0a"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "title",
+                    "example": "cute dog"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "title",
+                    "example": "dixi"
+                  },
+                  "birthDate": {
+                    "type": "string",
+                    "description": "date",
+                    "example": "25-02-2022"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "description": "sex",
+                    "example": "male"
+                  },
+                  "age": {
+                    "type": "string",
+                    "example": "1 year"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "User id",
+                    "example": "63efff95029ef62116f6d6ba"
+                  },
+                  "breed": {
+                    "type": "string",
+                    "description": "breed",
+                    "example": "labrador"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Location",
+                    "example": "Kyiv"
+                  },
+                  "comments": {
+                    "type": "string",
+                    "description": "Comments"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "description": "Price",
+                    "example": "50"
+                  },
+                  "favorite": {
+                    "type": "bool",
+                    "example": true
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": ["sell", "lost-found", "for-free"],
+                    "description": "category",
+                    "example": "lost-found"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
+                  }
+                }
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "id",
+                    "example": "63f15d7aa3ef6e831eb8ba0a"
+                  },
+                  "verify": {
+                    "type": "bool",
+                    "example": false
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Andriy"
+                  },
+                  "favoriteNotices": {
+                    "type": "array",
+                    "example": [
+                      "63edda2a4c63481daf90b4f3",
+                      "63ef3e8244d80ee0719c4480",
+                      "63edda2a4c63481daf90b4f1",
+                      "63f003d4f8ef99fb58d07959"
+                    ]
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "email@mail.com"
+                  }
+                }
+              },
+              "status": {
+                "type": "integer",
+                "example": 200
+              },
+              "message": {
+                "type": "string",
+                "example": "operation successful"
+              }
+            }
+          }
+        }
+      },
+
+      "CreateNoticesRequest": {
+        "type": "object",
+        "required": ["name", "birthdate", "breed"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title",
+            "example": "cute dog"
+          },
+          "name": {
+            "type": "string",
+            "description": "title",
+            "example": "dixi"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "date",
+            "example": "25-02-2022"
+          },
+          "sex": {
+            "type": "string",
+            "description": "sex",
+            "example": "male"
+          },
+          "favorite": {
+            "type": "bool",
+            "example": false
+          },
+          "breed": {
+            "type": "string",
+            "description": "breed",
+            "example": "labrador"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location",
+            "example": "Kyiv"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments",
+            "example": "Comments example"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price",
+            "example": "50"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["sell", "lost-found", "for-free"],
+            "description": "category",
+            "example": "lost-found"
           }
         }
       },
