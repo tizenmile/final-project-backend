@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ code: 201, message: "Success", data: token, user: { email } });
+    .json({ code: 201, message: "Success", token: token, user: { email } });
 };
 
 module.exports = login;
