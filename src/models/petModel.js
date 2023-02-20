@@ -6,6 +6,13 @@ const Schema = mongoose.Schema;
 
 const pet = new Schema(
   {
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
+    avatarURL: {
+      type: String,
+    },
     name: {
       type: String,
       required: true,
@@ -18,14 +25,15 @@ const pet = new Schema(
       type: String,
     },
     comments: {
-      type: String
-    }
+      type: String,
+    },
   },
+
   {
     versionKey: false,
   }
 );
 
-const Pet = mongoose.model("users", pet);
+const Pet = mongoose.model("Pet", pet);
 
 module.exports = { Pet };
