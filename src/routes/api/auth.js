@@ -3,7 +3,11 @@ const express = require("express");
 const { tryCatchWrapper } = require("../../helpers");
 
 const ctrlUser = require("../../controllers/auth/");
-const { userValidation } = require("../../middlewares/validationMiddleware");
+
+const {
+  userValidation,
+  validationLogin,
+} = require("../../middlewares/validationMiddleware");
 const {
   updateUserValidation,
 } = require("../../middlewares/updateUseerValidation");
@@ -20,11 +24,7 @@ router.post(
   tryCatchWrapper(ctrlUser.registerUser)
 );
 
-router.post(
-  "/login",
-  validation(joiLoginSchema),
-  tryCatchWrapper(ctrlUser.login)
-);
+router.post("/login", validationLogin, tryCatchWrapper(ctrlUser.login));
 
 router.get(
   "/current",

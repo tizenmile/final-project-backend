@@ -1,5 +1,5 @@
 const { User } = require("../../models/usersModel");
-const { Unauthorized } = require("http-errors");
+const { Unauthorized } = require("../../helpers/errors");
 const { SECRET } = process.env;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -9,7 +9,7 @@ const login = async (req, res, next) => {
 
   if (!email || !password) {
     res.status(404);
-    throw new Error("Email or password field not filled");
+    throw new Unauthorized("Email or password field not filled");
   }
 
   const user = await User.findOne({ email });
@@ -18,7 +18,7 @@ const login = async (req, res, next) => {
 
   if (!user || !isValidPassword) {
     res.status(404);
-    throw new Error("Invalid login or password");
+    throw new Unauthorized("Invalid login or password");
   }
 
   const payload = { _id: user._id };
@@ -32,9 +32,7 @@ const login = async (req, res, next) => {
 
   await User.findByIdAndUpdate(user._id, { token });
 
-  res
-    .status(201)
-    .json({ code: 201, message: "Success", data: token, user: { email } });
+  res.status(201).json({ code: 201, message: "Success", token: token, user: { email } });
 };
 
 module.exports = login;
