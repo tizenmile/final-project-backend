@@ -3,10 +3,8 @@ const express = require("express");
 const { tryCatchWrapper } = require("../../helpers");
 
 const ctrlUser = require("../../controllers/auth/");
-const { userValidation } = require("../../middlewares/validationMiddleware");
-const validation = require("../../middlewares/validation");
+const { userValidation, validationLogin } = require("../../middlewares/validationMiddleware");
 const { auth } = require("../../middlewares/auth");
-const { joiLoginSchema } = require("../../models/usersModel");
 
 const router = new express.Router();
 
@@ -18,7 +16,7 @@ router.post(
 
 router.post(
   "/login",
-  validation(joiLoginSchema),
+  validationLogin,
   tryCatchWrapper(ctrlUser.login)
 );
 

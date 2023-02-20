@@ -6,10 +6,8 @@ const User = require("./schemas/auth");
 
 // const { Unauthorized } = require("../helpers/errors");
 
-const register = async (
-  { email, password, name, city, mobile },
-  verificationToken
-) => {
+const register = async (body) => {
+  const {mobile, email, name, password, city} = body
   const avatarURL = gravatar.url(email, { format: "jpg" });
 
   const user = new User({
@@ -19,7 +17,6 @@ const register = async (
     avatarURL,
     city,
     mobile,
-    verificationToken,
   });
 
   return user.save();
