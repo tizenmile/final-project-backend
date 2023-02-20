@@ -38,6 +38,10 @@ const user = new Schema(
       type: String,
       required: [true, "City/region phone is required"],
     },
+    birthday: {
+      type: String,
+      default: "1980-01-01",
+    },
   },
   {
     versionKey: false,
