@@ -4,7 +4,7 @@ const { HttpError } = require("../helpers/errors");
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z][0-9a-zA-Z_-]{1,}@(.+).(.+)$"))
+      .pattern(new RegExp("^[a-zA-Z]([-.\s]?[0-9a-zA-Z_-]){1,}@(.+).(.+)$"))
       .email({
         minDomainSegments: 2,
       })
@@ -12,7 +12,9 @@ const userValidation = (req, res, next) => {
       .max(63)
       .required(),
     password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Zа-яёА-ЯЁ0-9]{7,32}$"))
+      .pattern(new RegExp("^([-.\s]?[a-zA-Zа-яёА-ЯЁ0-9]*)*$"))
+      .min(7)
+      .max(32)
       .required(),
     name: Joi.string().required(),
     city: Joi.string().required(),
@@ -28,6 +30,20 @@ const userValidation = (req, res, next) => {
   next();
 };
 
+const validationLogin = (req, res, next) => {
+  const joiLoginSchema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+  
+  const { error } = joiLoginSchema.validate(req.body);
+
+    if (error) {
+     return next(new HttpError(error.message));
+    }
+    next();
+};
+
 module.exports = {
-  userValidation,
+  userValidation, validationLogin
 };
