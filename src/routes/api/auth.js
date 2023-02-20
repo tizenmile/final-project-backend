@@ -11,7 +11,7 @@ const {
 const {
   updateUserValidation,
 } = require("../../middlewares/updateUseerValidation");
-const validation = require("../../middlewares/validation");
+// const validation = require("../../middlewares/validation");
 const { auth } = require("../../middlewares/auth");
 const { joiLoginSchema } = require("../../models/usersModel");
 const uploadCloud = require("../../middlewares/uploadMiddleware");
