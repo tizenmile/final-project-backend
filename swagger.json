@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "title": "Pet Project",
     "description": "NASHKODIV team project documentation",
     "license": {
@@ -34,6 +34,10 @@
     {
       "name": "Notices",
       "description": "Notices endpoints"
+    },
+    {
+      "name": "Pets",
+      "description": "Pets endpoints"
     }
   ],
 
@@ -303,7 +307,7 @@
       }
     },
 
-    "api/auth/current": {
+    "/api/auth/current": {
       "get": {
         "tags": ["User"],
         "summary": "Get information about the pet's user",
@@ -323,7 +327,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserPetsResponse"
+                  "$ref": "#/components/schemas/UserCurrentResponse"
                 }
               }
             }
@@ -681,6 +685,105 @@
           }
         }
       }
+    },
+
+    "/api/pets": {
+      "post": {
+        "tags": ["Pets"],
+        "summary": "Add pet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string",
+            "description": "The token issued to the current user"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "New pet",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation, pet created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing header with authorization token",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/api/pets/{id}": {
+      "delete": {
+        "tags": ["Pets"],
+        "summary": "Delete pet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string",
+            "description": "The token issued to the current user"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "id pet object"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation, pet deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletePetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing header with authorization token",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
     }
   },
 
@@ -727,6 +830,39 @@
               "type": "string",
               "description": "Message",
               "example": "User user@example.com signup"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "type": "string",
+                  "example": "//www.gravatar.com/avatar/c4abbb6a32895bd7df9f5e57a905adad"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Andriy"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "user@example.com"
+                },
+                "mobile": {
+                  "type": "string",
+                  "example": "+380123456789"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Kyiv"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "63f4806a4830088d189c41f8"
+                }
+              }
+            },
+            "token": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjQ4MDZhNDgzMDA4OGQxODljNDFmOCIsImlhdCI6MTY3Njk2ODA0MiwiZXhwIjoxNjc3MDA0MDQyfQ.a_c8VvrHC8BxiwjsUBpu1XABfqgENkvlIFp4jKKz1Pc"
             }
           }
         }
@@ -752,10 +888,18 @@
       "LoginResponse": {
         "type": "object",
         "properties": {
-          "data": {
+          "code": {
+            "type": "integer",
+            "example": 201
+          },
+          "message": {
+            "type": "string",
+            "example": "Success"
+          },
+          "token": {
             "type": "string",
             "description": "Token",
-            "example": "token-here"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2YxY2E5M2ZiYWViYzAwNWQ1Njg1MWUiLCJpYXQiOjE2NzY5NjgzNDQsImV4cCI6MTY3NzAwNDM0NH0.XQQt6uFMZivXDGX15Y3cNePrWB-KwuZLwRGCDGDtGqA"
           },
           "user": {
             "properties": {
@@ -839,6 +983,82 @@
             "description": "Date of Birth",
             "format": "binary",
             "example": "01.01.2000"
+          }
+        }
+      },
+
+      "UserCurrentResponse": {
+        "type": "object",
+        "properties": {
+          "petResult": {
+            "type": "array",
+            "example": "[]"
+          },
+          "userResult": {
+            "type": "object",
+            "properties": {
+              "favoriteNotices": {
+                "type": "array",
+                "example": "[]"
+              },
+              "_id": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Andriy"
+              },
+              "token": {
+                "type": "string",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2YxY2E5M2ZiYWViYzAwNWQ1Njg1MWUiLCJp"
+              },
+              "verify": {
+                "type": "bool",
+                "example": false
+              },
+              "verificationToken": {
+                "type": "string",
+                "example": "84f2fa3a-505c-47d8-88d5-a7c4e6b5acb9"
+              },
+              "avatarURL": {
+                "type": "string",
+                "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Andriy"
+              },
+              "address": {
+                "type": "string",
+                "description": "User's adress",
+                "example": "Kyiv"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone",
+                "example": "+380123456789"
+              },
+              "birthday": {
+                "type": "date",
+                "description": "Date of Birth",
+                "format": "binary",
+                "example": "01.01.2000"
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "createdAt",
+                "example": "2023-02-19T07:06:59.639Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "updatedAt",
+                "example": "2023-02-19T07:06:59.639Z"
+              }
+            }
           }
         }
       },
@@ -1294,10 +1514,14 @@
                 "description": "breed",
                 "example": "labrador"
               },
-              "location": {
+              "place": {
                 "type": "string",
                 "description": "Location",
                 "example": "Kyiv"
+              },
+              "photo": {
+                "type": "string",
+                "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
               },
               "comments": {
                 "type": "string",
@@ -1319,6 +1543,121 @@
                 "example": "lost-found"
               }
             }
+          }
+        }
+      },
+
+      "CreatePetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Dog name"
+          },
+          "date": {
+            "type": "string",
+            "example": "01-01-2023"
+          },
+          "breed": {
+            "type": "string",
+            "example": "dog"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Comments example"
+          }
+        }
+      },
+
+      "PetCreateResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "newPet": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "example": "63f4ba77128b47f8319d4fce"
+              },
+              "name": {
+                "type": "string",
+                "example": "Dog name"
+              },
+              "date": {
+                "type": "string",
+                "example": "01-01-2023"
+              },
+              "breed": {
+                "type": "string",
+                "example": "dogaaaa"
+              },
+              "comments": {
+                "type": "string",
+                "example": "Comments example"
+              },
+              "petAvatar": {
+                "type": "string",
+                "example": "//www.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48"
+              },
+              "_id": {
+                "type": "string",
+                "example": "63f4bd1477be4cc21edc173f"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-02-21T12:46:12.288Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-02-21T12:46:12.288Z"
+              }
+            }
+          }
+        }
+      },
+
+      "DeletePetResponse": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "example": "63f4ba77128b47f8319d4fce"
+          },
+          "name": {
+            "type": "string",
+            "example": "Dog name"
+          },
+          "date": {
+            "type": "string",
+            "example": "01-01-2023"
+          },
+          "breed": {
+            "type": "string",
+            "example": "dogaaaa"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Comments example"
+          },
+          "petAvatar": {
+            "type": "string",
+            "example": "//www.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48"
+          },
+          "_id": {
+            "type": "string",
+            "example": "63f4bd1477be4cc21edc173f"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2023-02-21T12:46:12.288Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2023-02-21T12:46:12.288Z"
           }
         }
       }
