@@ -2,6 +2,13 @@ const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema(
   {
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
+    avatarURL: {
+      type: String,
+    },
     name: {
       type: String,
       required: [true, "Set name for pet"],
@@ -28,6 +35,7 @@ const petSchema = new Schema(
       required: true,
     },
   },
+
   {
     timestamps: true,
     versionKey: false,
