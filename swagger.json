@@ -303,7 +303,7 @@
       }
     },
 
-    "api/auth/current": {
+    "/api/auth/current": {
       "get": {
         "tags": ["User"],
         "summary": "Get information about the pet's user",
