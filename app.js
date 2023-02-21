@@ -1,14 +1,17 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const { authRouter } = require("./src/routes/api/auth");
 
 const { staticRouter } = require("./src/routes/api/static");
 
 const noticesRouter = require("./src/routes/api/notices");
+
+const petsRouter = require("./src/routes/api/pets");
+
 const { errorHandler } = require("./src/helpers/apiHelpers");
 
 const app = express();
@@ -23,9 +26,10 @@ app.use("/api/auth", authRouter);
 
 // app.use('/avatars', express.static('public/avatars'))
 app.use("/api/notices", noticesRouter);
+app.use("/api/pets", petsRouter);
 app.use("/api/static", staticRouter);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(errorHandler);
 

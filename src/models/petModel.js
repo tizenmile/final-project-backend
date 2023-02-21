@@ -1,14 +1,10 @@
-const Joi = require("joi");
-const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
+const { Schema, model } = require("mongoose");
 
-const Schema = mongoose.Schema;
-
-const pet = new Schema(
+const petSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Set name for pet"],
     },
     date: {
       type: String,
@@ -16,16 +12,28 @@ const pet = new Schema(
     },
     breed: {
       type: String,
+      default: "",
     },
     comments: {
-      type: String
-    }
+      type: String,
+      default: "",
+    },
+    petAvatar: {
+      type: String,
+      default: "",
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   {
+    timestamps: true,
     versionKey: false,
   }
 );
 
-const Pet = mongoose.model("users", pet);
+const Pet = model("pets", petSchema);
 
 module.exports = { Pet };
