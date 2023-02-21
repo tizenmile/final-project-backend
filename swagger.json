@@ -34,6 +34,10 @@
     {
       "name": "Notices",
       "description": "Notices endpoints"
+    },
+    {
+      "name": "Pets",
+      "description": "Pets endpoints"
     }
   ],
 
@@ -673,6 +677,105 @@
           },
           "404": {
             "description": "Favorites not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/api/pets": {
+      "post": {
+        "tags": ["Pets"],
+        "summary": "Add pet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string",
+            "description": "The token issued to the current user"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "New pet",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation, pet created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing header with authorization token",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/api/pets/{id}": {
+      "delete": {
+        "tags": ["Pets"],
+        "summary": "Delete pet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string",
+            "description": "The token issued to the current user"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "id pet object"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation, pet deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletePetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing header with authorization token",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
             "content": {}
           },
           "500": {
@@ -1416,8 +1519,8 @@
                 "description": "Location",
                 "example": "Kyiv"
               },
-              "photo":{
-                "type":"string",
+              "photo": {
+                "type": "string",
                 "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
               },
               "comments": {
@@ -1440,6 +1543,121 @@
                 "example": "lost-found"
               }
             }
+          }
+        }
+      },
+
+      "CreatePetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Dog name"
+          },
+          "date": {
+            "type": "string",
+            "example": "01-01-2023"
+          },
+          "breed": {
+            "type": "string",
+            "example": "dog"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Comments example"
+          }
+        }
+      },
+
+      "PetCreateResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "newPet": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "example": "63f4ba77128b47f8319d4fce"
+              },
+              "name": {
+                "type": "string",
+                "example": "Dog name"
+              },
+              "date": {
+                "type": "string",
+                "example": "01-01-2023"
+              },
+              "breed": {
+                "type": "string",
+                "example": "dogaaaa"
+              },
+              "comments": {
+                "type": "string",
+                "example": "Comments example"
+              },
+              "petAvatar": {
+                "type": "string",
+                "example": "//www.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48"
+              },
+              "_id": {
+                "type": "string",
+                "example": "63f4bd1477be4cc21edc173f"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-02-21T12:46:12.288Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-02-21T12:46:12.288Z"
+              }
+            }
+          }
+        }
+      },
+
+      "DeletePetResponse": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "example": "63f4ba77128b47f8319d4fce"
+          },
+          "name": {
+            "type": "string",
+            "example": "Dog name"
+          },
+          "date": {
+            "type": "string",
+            "example": "01-01-2023"
+          },
+          "breed": {
+            "type": "string",
+            "example": "dogaaaa"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Comments example"
+          },
+          "petAvatar": {
+            "type": "string",
+            "example": "//www.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48"
+          },
+          "_id": {
+            "type": "string",
+            "example": "63f4bd1477be4cc21edc173f"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2023-02-21T12:46:12.288Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2023-02-21T12:46:12.288Z"
           }
         }
       }
