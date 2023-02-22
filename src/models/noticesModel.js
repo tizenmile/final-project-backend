@@ -7,19 +7,19 @@ const noticeSchema = new mongoose.Schema({
   },
   breed: {
     type: String,
-    required: true,
+    // required: true,
   },
   name: {
     type: String,
-    required: true,
+    // required: true,
   },
-  location: {
+  place: {
     type: String,
     required: true,
   },
   birthDate: {
-    type: String,
-    required: true,
+    type: Date,
+    // required: true,
   },
   sex: {
     type: String,
@@ -27,7 +27,7 @@ const noticeSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    // requaried: true,
+    requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -39,19 +39,16 @@ const noticeSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    enum: ["sell", "lost-found", "for-free"],
     requaried: true,
   },
   photo: {
     type: String,
-    requaried: true,
-  },
-  favorite: {
-    type: Boolean,
-    default: false,
+    // requaried: true,
   },
   comments: {
     type: String,
-    requaried: true,
+    // requaried: true,
   },
 });
 

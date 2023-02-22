@@ -4,15 +4,14 @@ module.exports = {
   postNoticeValidation: (req, res, next) => {
     const schema = Joi.object({
       title: Joi.string().required().min(2).max(48),
-      breed: Joi.string().required().min(2).max(48),
-      name: Joi.string().required().min(2).max(16),
-      location: Joi.string().required(),
-      birthDate: Joi.string().required(),
+      breed: Joi.string().min(2).max(48),
+      name: Joi.string().min(2).max(16),
+      place: Joi.string().required(),
+      birthDate: Joi.date(),
       sex: Joi.string().required(),
-      price: Joi.number().required().min(1),
+      price: Joi.number().required(),
       category: Joi.string().required(),
-      favorite: Joi.boolean().required(),
-      comments: Joi.string().required().min(8).max(120),
+      comments: Joi.string().min(8).max(120),
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
