@@ -14,8 +14,8 @@ const petSchema = new Schema(
       required: [true, "Set name for pet"],
     },
     date: {
-      type: String,
-      required: true,
+      type: Date,
+      default: new Date(),
     },
     breed: {
       type: String,
