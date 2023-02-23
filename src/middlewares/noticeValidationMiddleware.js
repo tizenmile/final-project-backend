@@ -7,11 +7,12 @@ module.exports = {
       breed: Joi.string().min(2).max(48),
       name: Joi.string().min(2).max(16),
       place: Joi.string().required(),
-      birthDate: Joi.date(),
+      birthDate: Joi.string(),
       sex: Joi.string().required(),
-      price: Joi.number().required(),
+      price: Joi.number(),
       category: Joi.string().required(),
       comments: Joi.string().min(8).max(120),
+      image: Joi.string(),
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
