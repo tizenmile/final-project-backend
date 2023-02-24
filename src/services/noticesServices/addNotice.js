@@ -16,7 +16,6 @@ const addNotice = async (req) => {
       photo: avatarURL,
     });
 
-    console.log(notice);
     await notice.save();
     return notice;
   } catch (error) {
