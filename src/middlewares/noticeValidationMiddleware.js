@@ -7,7 +7,7 @@ module.exports = {
       breed: Joi.string().min(2).max(48),
       name: Joi.string().min(2).max(16),
       place: Joi.string().required(),
-      birthDate: Joi.string(),
+      birthDate: Joi.date(),
       sex: Joi.string().required(),
       price: Joi.number(),
       category: Joi.string().required(),
