@@ -18,7 +18,7 @@ const noticeSchema = new mongoose.Schema({
     required: true,
   },
   birthDate: {
-    type: Date,
+    type: String,
     // required: true,
   },
   sex: {
@@ -27,19 +27,19 @@ const noticeSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    requaried: true,
+    // requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
-  },
+  // owner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "users",
+  // },
   category: {
     type: String,
-    enum: ["sell", "lost-found", "for-free"],
+    enum: ["sell", "lost/found", "in good hands"],
     requaried: true,
   },
   photo: {
