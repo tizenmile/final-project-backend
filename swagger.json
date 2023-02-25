@@ -170,18 +170,10 @@
     },
 
     "/api/auth/avatar": {
-      "patch": {
+      "post": {
         "tags": ["User"],
         "summary": "Update avatar",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "avatar",
@@ -224,7 +216,7 @@
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
-          "204": {
+          "201": {
             "description": "The user is logged out",
             "content": {}
           },
@@ -322,7 +314,7 @@
             "in": "path",
             "name": "category",
             "type": "string",
-            "description": "Name of category: 'sell', 'in good hands', 'lost-found', 'for-free'"
+            "description": "Name of category: 'sell', 'in good hands', 'lost-found'"
           }
         ],
         "responses": {
@@ -820,11 +812,6 @@
       "UpdateRequest": {
         "type": "object",
         "properties": {
-          "avatarURL": {
-            "type": "string",
-            "description": "User's avatar",
-            "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
-          },
           "name": {
             "type": "string",
             "description": "User's name",
@@ -849,7 +836,7 @@
             "type": "date",
             "description": "Date of Birth",
             "format": "binary",
-            "example": "01.01.2000"
+            "example": "2023-01-20"
           }
         }
       },
@@ -1027,7 +1014,7 @@
       "AvatarRequest": {
         "type": "object",
         "properties": {
-          "avatarURL": {
+          "image": {
             "type": "string",
             "description": "Avatar",
             "format": "binary"
@@ -1654,7 +1641,7 @@
           },
           "breed": {
             "type": "string",
-            "example": "dog"
+            "example": "dogBreed"
           },
           "comments": {
             "type": "string",
@@ -1687,7 +1674,7 @@
               },
               "breed": {
                 "type": "string",
-                "example": "dogaaaa"
+                "example": "dogBreed"
               },
               "comments": {
                 "type": "string",
