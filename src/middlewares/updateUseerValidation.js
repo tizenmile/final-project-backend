@@ -10,9 +10,9 @@ const updateUserValidation = (req, res, next) => {
       })
       .min(6)
       .max(63),
-    name: Joi.string().min(2).max(15),
-    birthday: Joi.string().pattern(/^(\d{2})\.(\d{2})\.(\d{4})$/),
-    city: Joi.string().min(2).max(15),
+    name: Joi.string().min(2).max(30),
+    birthday: Joi.string().pattern(/^(\d{4})\-(\d{2})\-(\d{2})$/),
+    city: Joi.string().min(2).max(30),
     mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")),
   }).required();
 
