@@ -2,13 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema(
   {
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-    },
-    avatarURL: {
-      type: String,
-    },
     name: {
       type: String,
       required: [true, "Set name for pet"],
