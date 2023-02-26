@@ -4,7 +4,7 @@ const { HttpError } = require("../helpers/errors");
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z]([-.\s]?[0-9a-zA-Z_-]){1,}@(.+).(.+)$"))
+      .pattern(new RegExp("^[a-zA-Z0-9]([-.\s]?[0-9a-zA-Z_-]){1,}@(.+).(.+)$"))
       .email({
         minDomainSegments: 2,
       })
