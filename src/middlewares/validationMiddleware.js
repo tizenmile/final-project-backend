@@ -4,7 +4,7 @@ const { HttpError } = require("../helpers/errors");
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z]([-.\s]?[0-9a-zA-Z_-]){1,}@(.+).(.+)$"))
+      .pattern(new RegExp("^[a-zA-Z0-9]([-.\s]?[0-9a-zA-Z_-]){1,}@(.+).(.+)$"))
       .email({
         minDomainSegments: 2,
       })
@@ -16,15 +16,15 @@ const userValidation = (req, res, next) => {
       .min(7)
       .max(32)
       .required(),
-    name: Joi.string().required(),
-    city: Joi.string().required(),
+    name: Joi.string().pattern(new RegExp("^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$")).required(),
+    city: Joi.string().pattern(new RegExp("^(?:[A-Za-z]{2,}(?:(\.\s|'s\s|\s?-\s?|\s)?(?=[A-Za-z]+))){1,2}(?:[A-Za-z]+)?$")).required(),
     mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")).required(),
   }).required();
 
   const { error } = schema.validate(req.body);
 
   if (error) {
-    return next(new HttpError(error.message));
+    return next(new HttpError(400, error.message));
   }
 
   next();
