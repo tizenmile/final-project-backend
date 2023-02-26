@@ -14,6 +14,11 @@ const login = async (req, res, next) => {
 
   const user = await User.findOne({ email });
 
+  if (!user) {
+    res.status(404);
+    throw new Unauthorized("Invalid login or password");
+  }
+
   const isValidPassword = bcrypt.compareSync(password, user.password);
 
   if (!user || !isValidPassword) {
