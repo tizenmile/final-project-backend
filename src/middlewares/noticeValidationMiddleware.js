@@ -9,7 +9,7 @@ module.exports = {
       place: Joi.string().required(),
       birthDate: Joi.date(),
       sex: Joi.string().required(),
-      price: Joi.number(),
+      price: Joi.number().min(1),
       category: Joi.string().required(),
       comments: Joi.string().min(8).max(120),
       image: Joi.string(),

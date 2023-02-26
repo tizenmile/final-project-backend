@@ -47,7 +47,6 @@
         "tags": ["User"],
         "summary": "Create a new user",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -91,7 +90,6 @@
         "tags": ["User"],
         "summary": "Login user",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Login's object",
           "required": true,
@@ -131,15 +129,7 @@
       "patch": {
         "tags": ["User"],
         "summary": "Update an existing user",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "User's object",
@@ -180,18 +170,10 @@
     },
 
     "/api/auth/avatar": {
-      "patch": {
+      "post": {
         "tags": ["User"],
         "summary": "Update avatar",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "avatar",
@@ -231,18 +213,10 @@
       "post": {
         "tags": ["User"],
         "summary": "Log out user",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
-          "204": {
+          "201": {
             "description": "The user is logged out",
             "content": {}
           },
@@ -287,7 +261,6 @@
         "tags": ["Services-sidebar"],
         "summary": "Get all partners",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Ok, Successful operation",
@@ -311,15 +284,7 @@
       "get": {
         "tags": ["User"],
         "summary": "Get information about the pet's user",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -349,10 +314,9 @@
             "in": "path",
             "name": "category",
             "type": "string",
-            "description": "Name of category: 'sell', 'in good hands', 'lost-found', 'for-free'"
+            "description": "Name of category: 'sell', 'in good hands', 'lost-found'"
           }
         ],
-        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Successful operation, notices found",
@@ -380,15 +344,7 @@
       "get": {
         "tags": ["Notices"],
         "summary": "My notices",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -396,7 +352,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NoticesResponse"
+                  "$ref": "#/components/schemas/OwnNoticesResponse"
                 }
               }
             }
@@ -421,26 +377,13 @@
       "post": {
         "tags": ["Notices"],
         "summary": "Create my notices",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
 
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "New notice",
           "required": true,
           "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateNoticesRequest"
-              }
-            },
             "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/CreateNoticePhotoRequest"
@@ -454,7 +397,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NoticesResponse"
+                  "$ref": "#/components/schemas/CreateNoticesResponse"
                 }
               }
             }
@@ -486,13 +429,6 @@
             "required": true,
             "type": "string",
             "description": "Add to favorites"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -530,13 +466,6 @@
             "required": true,
             "type": "string",
             "description": "Remove from favorites"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -609,13 +538,6 @@
             "required": true,
             "type": "string",
             "description": "Search by id"
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -650,15 +572,7 @@
       "get": {
         "tags": ["Notices"],
         "summary": "My favorites notices",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -691,15 +605,7 @@
       "post": {
         "tags": ["Pets"],
         "summary": "Add pet",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "New pet",
@@ -744,13 +650,6 @@
         "tags": ["Pets"],
         "summary": "Delete pet",
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string",
-            "description": "The token issued to the current user"
-          },
           {
             "in": "path",
             "name": "id",
@@ -822,48 +721,45 @@
       },
 
       "RegistrationResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "type": "string",
-              "description": "Message",
-              "example": "User user@example.com signup"
-            },
-            "user": {
-              "type": "object",
-              "properties": {
-                "avatar": {
-                  "type": "string",
-                  "example": "//www.gravatar.com/avatar/c4abbb6a32895bd7df9f5e57a905adad"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Andriy"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "user@example.com"
-                },
-                "mobile": {
-                  "type": "string",
-                  "example": "+380123456789"
-                },
-                "city": {
-                  "type": "string",
-                  "example": "Kyiv"
-                },
-                "id": {
-                  "type": "string",
-                  "example": "63f4806a4830088d189c41f8"
-                }
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "User user@example.com signup"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "avatar": {
+                "type": "string",
+                "example": "//www.gravatar.com/avatar/c4abbb6a32895bd7df9f5e57a905adad"
+              },
+              "name": {
+                "type": "string",
+                "example": "Andriy"
+              },
+              "email": {
+                "type": "string",
+                "example": "user@example.com"
+              },
+              "mobile": {
+                "type": "string",
+                "example": "+380123456789"
+              },
+              "city": {
+                "type": "string",
+                "example": "Kyiv"
+              },
+              "id": {
+                "type": "string",
+                "example": "63f4806a4830088d189c41f8"
               }
-            },
-            "token": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjQ4MDZhNDgzMDA4OGQxODljNDFmOCIsImlhdCI6MTY3Njk2ODA0MiwiZXhwIjoxNjc3MDA0MDQyfQ.a_c8VvrHC8BxiwjsUBpu1XABfqgENkvlIFp4jKKz1Pc"
             }
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjQ4MDZhNDgzMDA4OGQxODljNDFmOCIsImlhdCI6MTY3Njk2ODA0MiwiZXhwIjoxNjc3MDA0MDQyfQ.a_c8VvrHC8BxiwjsUBpu1XABfqgENkvlIFp4jKKz1Pc"
           }
         }
       },
@@ -926,17 +822,12 @@
             "description": "User's email",
             "format": "email"
           },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          },
-          "address": {
+          "city": {
             "type": "string",
             "description": "User's adress",
             "example": "Kyiv"
           },
-          "phone": {
+          "mobile": {
             "type": "string",
             "description": "User's phone",
             "example": "+380123456789"
@@ -945,7 +836,7 @@
             "type": "date",
             "description": "Date of Birth",
             "format": "binary",
-            "example": "01.01.2000"
+            "example": "2023-01-20"
           }
         }
       },
@@ -953,10 +844,10 @@
       "UpdateResponse": {
         "type": "object",
         "properties": {
-          "userId": {
+          "avatarURL": {
             "type": "string",
-            "description": "User's name",
-            "example": "Andriy"
+            "description": "User's avatar",
+            "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
           },
           "email": {
             "type": "string",
@@ -968,12 +859,12 @@
             "description": "User's name",
             "example": "Andriy"
           },
-          "address": {
+          "city": {
             "type": "string",
             "description": "User's adress",
             "example": "Kyiv"
           },
-          "phone": {
+          "mobile": {
             "type": "string",
             "description": "User's phone",
             "example": "+380123456789"
@@ -1066,10 +957,56 @@
       "CreateNoticePhotoRequest": {
         "type": "object",
         "properties": {
-          "Photo": {
+          "image": {
             "type": "string",
             "description": "Photo",
             "format": "binary"
+          },
+          "title": {
+            "type": "string",
+            "description": "title",
+            "example": "cute dog"
+          },
+          "name": {
+            "type": "string",
+            "description": "title",
+            "example": "dixi"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "date",
+            "example": "2021-10-09T21:00:00.000Z"
+          },
+          "sex": {
+            "type": "string",
+            "description": "sex",
+            "example": "male"
+          },
+          "breed": {
+            "type": "string",
+            "description": "breed",
+            "example": "labrador"
+          },
+          "place": {
+            "type": "string",
+            "description": "place",
+            "example": "Kyiv"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments",
+            "example": "Comments example"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price",
+            "example": "50"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["sell", "lost-found", "for-free"],
+            "description": "category",
+            "example": "sell"
           }
         }
       },
@@ -1077,7 +1014,7 @@
       "AvatarRequest": {
         "type": "object",
         "properties": {
-          "avatarURL": {
+          "image": {
             "type": "string",
             "description": "Avatar",
             "format": "binary"
@@ -1368,25 +1305,21 @@
           "birthDate": {
             "type": "string",
             "description": "date",
-            "example": "25-02-2022"
+            "example": "2021-10-09T21:00:00.000Z"
           },
           "sex": {
             "type": "string",
             "description": "sex",
             "example": "male"
           },
-          "favorite": {
-            "type": "bool",
-            "example": false
-          },
           "breed": {
             "type": "string",
             "description": "breed",
             "example": "labrador"
           },
-          "location": {
+          "place": {
             "type": "string",
-            "description": "Location",
+            "description": "place",
             "example": "Kyiv"
           },
           "comments": {
@@ -1403,7 +1336,84 @@
             "type": "string",
             "enum": ["sell", "lost-found", "for-free"],
             "description": "category",
-            "example": "lost-found"
+            "example": "sell"
+          }
+        }
+      },
+
+      "CreateNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 201
+          },
+          "message": {
+            "type": "string",
+            "example": "notice created"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63f8b738aeae313607f42824"
+              },
+              "title": {
+                "type": "string",
+                "description": "title",
+                "example": "cute dog"
+              },
+              "name": {
+                "type": "string",
+                "description": "title",
+                "example": "dixi"
+              },
+              "birthDate": {
+                "type": "string",
+                "description": "date",
+                "example": "2021-10-09T21:00:00.000Z"
+              },
+              "sex": {
+                "type": "string",
+                "description": "sex",
+                "example": "male"
+              },
+              "breed": {
+                "type": "string",
+                "description": "breed",
+                "example": "labrador"
+              },
+              "place": {
+                "type": "string",
+                "description": "place",
+                "example": "Kyiv"
+              },
+              "comments": {
+                "type": "string",
+                "description": "Comments",
+                "example": "Comments example"
+              },
+              "price": {
+                "type": "integer",
+                "description": "Price",
+                "example": "50"
+              },
+              "category": {
+                "type": "string",
+                "enum": ["sell", "lost-found", "for-free"],
+                "description": "category",
+                "example": "sell"
+              },
+              "userId": {
+                "type": "string",
+                "example": "63f4ba77128b47f8319d4fce"
+              },
+              "photo": {
+                "type": "string",
+                "example": "https://media.istockphoto.com/id/1142382282/vector/cat-dog-budgie-and-guinea-pig.jpg?s=612x612&w=0&k=20&c=IorKWJBJ9GXZN1InnTuYt9vNGanh6AFTFiHiUKOUf0g="
+              }
+            }
           }
         }
       },
@@ -1468,85 +1478,156 @@
       "NoticesResponse": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "integer",
-            "example": 201
-          },
-          "message": {
-            "type": "string",
-            "example": "notice created"
-          },
-          "data": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string",
-                "description": "id",
-                "example": "63f15d7aa3ef6e831eb8ba0a"
-              },
-              "title": {
-                "type": "string",
-                "description": "title",
-                "example": "cute dog"
-              },
-              "name": {
-                "type": "string",
-                "description": "title",
-                "example": "dixi"
-              },
-              "birthDate": {
-                "type": "string",
-                "description": "date",
-                "example": "25-02-2022"
-              },
-              "sex": {
-                "type": "string",
-                "description": "sex",
-                "example": "male"
-              },
-              "userId": {
-                "type": "string",
-                "description": "User id",
-                "example": "63efff95029ef62116f6d6ba"
-              },
-              "breed": {
-                "type": "string",
-                "description": "breed",
-                "example": "labrador"
-              },
-              "place": {
-                "type": "string",
-                "description": "Location",
-                "example": "Kyiv"
-              },
-              "photo": {
-                "type": "string",
-                "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
-              },
-              "comments": {
-                "type": "string",
-                "description": "Comments"
-              },
-              "price": {
-                "type": "integer",
-                "description": "Price",
-                "example": "50"
-              },
-              "favorite": {
-                "type": "bool",
-                "example": true
-              },
-              "category": {
-                "type": "string",
-                "enum": ["sell", "lost-found", "for-free"],
-                "description": "category",
-                "example": "lost-found"
+          "notices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "id",
+                  "example": "63f15d7aa3ef6e831eb8ba0a"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "title",
+                  "example": "cute dog"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "title",
+                  "example": "dixi"
+                },
+                "birthDate": {
+                  "type": "string",
+                  "description": "date",
+                  "example": "25-02-2022"
+                },
+                "sex": {
+                  "type": "string",
+                  "description": "sex",
+                  "example": "male"
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "User id",
+                  "example": "63efff95029ef62116f6d6ba"
+                },
+                "breed": {
+                  "type": "string",
+                  "description": "breed",
+                  "example": "labrador"
+                },
+                "place": {
+                  "type": "string",
+                  "description": "Location",
+                  "example": "Kyiv"
+                },
+                "photo": {
+                  "type": "string",
+                  "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
+                },
+                "comments": {
+                  "type": "string",
+                  "description": "Comments"
+                },
+                "price": {
+                  "type": "integer",
+                  "description": "Price",
+                  "example": "50"
+                },
+                "favorite": {
+                  "type": "bool",
+                  "example": true
+                },
+                "category": {
+                  "type": "string",
+                  "enum": ["sell", "lost-found", "for-free"],
+                  "description": "category",
+                  "example": "lost-found"
+                }
               }
             }
           }
         }
       },
 
+      "OwnNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "noticesList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "id",
+                  "example": "63f15d7aa3ef6e831eb8ba0a"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "title",
+                  "example": "cute dog"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "title",
+                  "example": "dixi"
+                },
+                "birthDate": {
+                  "type": "string",
+                  "description": "date",
+                  "example": "25-02-2022"
+                },
+                "sex": {
+                  "type": "string",
+                  "description": "sex",
+                  "example": "male"
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "User id",
+                  "example": "63efff95029ef62116f6d6ba"
+                },
+                "breed": {
+                  "type": "string",
+                  "description": "breed",
+                  "example": "labrador"
+                },
+                "place": {
+                  "type": "string",
+                  "description": "Location",
+                  "example": "Kyiv"
+                },
+                "photo": {
+                  "type": "string",
+                  "example": "//www.gravatar.com/avatar/92a3928c6b710190ab7116029b733f1c"
+                },
+                "comments": {
+                  "type": "string",
+                  "description": "Comments"
+                },
+                "price": {
+                  "type": "integer",
+                  "description": "Price",
+                  "example": "50"
+                },
+                "favorite": {
+                  "type": "bool",
+                  "example": true
+                },
+                "category": {
+                  "type": "string",
+                  "enum": ["sell", "lost-found", "for-free"],
+                  "description": "category",
+                  "example": "lost-found"
+                }
+              }
+            }
+          }
+        }
+      },
       "CreatePetRequest": {
         "type": "object",
         "properties": {
@@ -1560,7 +1641,7 @@
           },
           "breed": {
             "type": "string",
-            "example": "dog"
+            "example": "dogBreed"
           },
           "comments": {
             "type": "string",
@@ -1593,7 +1674,7 @@
               },
               "breed": {
                 "type": "string",
-                "example": "dogaaaa"
+                "example": "dogBreed"
               },
               "comments": {
                 "type": "string",
