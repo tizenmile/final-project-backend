@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
     code: 201,
     message: "Success",
     token: token,
-    user,
+    _id: user._id,
   });
 };
 
