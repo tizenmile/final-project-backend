@@ -16,8 +16,8 @@ const userValidation = (req, res, next) => {
       .min(7)
       .max(32)
       .required(),
-    name: Joi.string().required(),
-    city: Joi.string().required(),
+    name: Joi.string().pattern(new RegExp("^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$")).required(),
+    city: Joi.string().pattern(new RegExp("^(?:[A-Za-z]{2,}(?:(\.\s|'s\s|\s?-\s?|\s)?(?=[A-Za-z]+))){1,2}(?:[A-Za-z]+)?$")).required(),
     mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")).required(),
   }).required();
 
