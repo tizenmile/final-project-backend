@@ -8,8 +8,8 @@ const getFavoriteNoticesController = async (reg, res) => {
         limit = parseInt(limit) > 8 ? 8 : parseInt(limit)
     }
     
-    const notices = await noticesServices.getFavoriteNotices(userId, page, limit)
-  res.json({notices})
+    const data = await noticesServices.getFavoriteNotices(userId, page, limit)
+  res.json({data})
 } 
 
 module.exports = {

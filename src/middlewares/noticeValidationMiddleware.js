@@ -9,10 +9,9 @@ module.exports = {
       place: Joi.string().required(),
       birthDate: Joi.date(),
       sex: Joi.string().required(),
-      price: Joi.number().min(1),
+      price: Joi.number().required(),
       category: Joi.string().required(),
       comments: Joi.string().min(8).max(120),
-      image: Joi.string(),
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {

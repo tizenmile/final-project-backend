@@ -4,7 +4,7 @@ const {User} = require('../../models/usersModel')
 
 const getFavoriteNotices = async ( userId, page, limit) => {
  
-  const user = await User.findOne({ _id: userId })
+    const user = await User.findOne({ _id: userId })
     if (!user) {
       throw new HttpError(400, 'User not found')
   }
@@ -15,14 +15,18 @@ const getFavoriteNotices = async ( userId, page, limit) => {
 
   const notices = await Notice.find({ '_id': { $in: user.favoriteNotices } })
     .sort({ _id: -1 })
-    .skip(parseInt(page))
+    .skip(parseInt(page) * parseInt(limit))
     .limit(parseInt(limit))
-    console.log(notices);
     
   if (!notices) {
       throw new HttpError(404, 'Notices not found')
     }
-    return notices
+    const total = (await Notice.find({ '_id': { $in: user.favoriteNotices } })).length
+    const data = {
+      notices,
+      total
+      }
+    return data
 }
 
 module.exports = {
