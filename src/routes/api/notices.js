@@ -4,6 +4,7 @@ const router = express.Router();
 const { asyncWrapper } = require("../../helpers/apiHelpers");
 const { noticesControllers } = require("../../controllers");
 const { auth } = require("../../middlewares/auth");
+const {authMiddleware} = require('../../middlewares/authTest')
 const {
   postNoticeValidation,
 } = require("../../middlewares/noticeValidationMiddleware");
@@ -25,7 +26,7 @@ router.put(
 );
 router.get(
   "/fav-notice/",
-  auth,
+  authMiddleware,
   asyncWrapper(noticesControllers.getFavoriteNoticesController)
 );
 router.get(
