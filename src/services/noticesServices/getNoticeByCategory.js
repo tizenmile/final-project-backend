@@ -3,7 +3,7 @@ const { Notice } = require("../../models/noticesModel");
 const { HttpError } = require("../../helpers/HttpError");
 
 const getNoticeByCategory = async (categoryName) => {
-  const notices = await Notice.find({ category: categoryName });
+  const notices = await Notice.find({ category: categoryName }).sort({ _id: -1 });
   if (!notices || notices.length === 0) {
     throw new NotFoundError("Not found");
   }
