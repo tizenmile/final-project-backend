@@ -18,6 +18,30 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const uploadCloud = multer({ storage });
+const uploadCloud = multer({
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB in bytes
+  },
+}).single("image");
 
-module.exports = uploadCloud;
+function fileUploadMiddleware(req, res, next) {
+  uploadCloud(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading
+      if (err.code === "LIMIT_FILE_SIZE") {
+        return res
+          .status(400)
+          .json({ error: "File size too large. Max size is 5MB" });
+      }
+    } else if (err) {
+      // An unknown error occurred when uploading
+      return res.status(400).json({
+        error: "Error uploading file.",
+      });
+    }
+    next();
+  });
+}
+
+module.exports = fileUploadMiddleware;

@@ -13,8 +13,9 @@ const {
 } = require("../../middlewares/updateUseerValidation");
 // const validation = require("../../middlewares/validation");
 const { auth } = require("../../middlewares/auth");
+const { authMiddleware } = require("../../middlewares/authTest");
 const { joiLoginSchema } = require("../../models/usersModel");
-const uploadCloud = require("../../middlewares/uploadMiddleware");
+const fileUploadMiddleware = require("../../middlewares/uploadMiddleware");
 
 const router = new express.Router();
 
@@ -28,20 +29,20 @@ router.post("/login", validationLogin, tryCatchWrapper(ctrlUser.login));
 
 router.get(
   "/current",
-  tryCatchWrapper(auth),
+  authMiddleware,
   tryCatchWrapper(ctrlUser.currentUserController)
 );
 router.patch(
   "/update",
-  tryCatchWrapper(auth),
+  authMiddleware,
   updateUserValidation,
   tryCatchWrapper(ctrlUser.updateUserInfoController)
 );
 
 router.post(
   "/avatar",
-  tryCatchWrapper(auth),
-  uploadCloud.single("image"),
+  authMiddleware,
+  fileUploadMiddleware,
   tryCatchWrapper(ctrlUser.updateUserAvatarController)
 );
 
