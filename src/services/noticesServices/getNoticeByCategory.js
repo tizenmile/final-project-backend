@@ -4,7 +4,8 @@ const { HttpError } = require("../../helpers/HttpError");
 
 const getNoticeByCategory = async (categoryName, page, limit) => {
   const notices = await Notice.find({ category: categoryName })
-  .skip(parseInt(page) * parseInt(limit))
+    .sort({ _id: -1 })
+    .skip(parseInt(page) * parseInt(limit))
     .limit(parseInt(limit))
   if (!notices || notices.length === 0) {
     throw new NotFoundError("Not found");

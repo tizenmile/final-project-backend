@@ -7,11 +7,9 @@ const noticeSchema = new mongoose.Schema({
   },
   breed: {
     type: String,
-    // required: true,
   },
   name: {
     type: String,
-    // required: true,
   },
   place: {
     type: String,
@@ -19,7 +17,6 @@ const noticeSchema = new mongoose.Schema({
   },
   birthDate: {
     type: Date,
-    // required: true,
   },
   sex: {
     type: String,
@@ -27,15 +24,10 @@ const noticeSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-  },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
   },
   category: {
     type: String,
@@ -44,12 +36,10 @@ const noticeSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
-    // requaried: true,
   },
   comments: {
     type: String,
-    // requaried: true,
-  },
+  }
 });
 
 const Notice = mongoose.model("Notice", noticeSchema);
