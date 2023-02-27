@@ -32,7 +32,7 @@ router.get(
 );
 router.patch(
   "/update",
-  tryCatchWrapper(auth),
+  auth,
   updateUserValidation,
   tryCatchWrapper(ctrlUser.updateUserInfoController)
 );
