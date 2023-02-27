@@ -27,16 +27,16 @@ const noticeSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    // requaried: true,
+    requaried: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  // owner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "users",
-  // },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
   category: {
     type: String,
     enum: ["sell", "lost-found", "for-free"],
