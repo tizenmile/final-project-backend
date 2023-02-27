@@ -8,7 +8,7 @@ const asyncWrapper = (controller) => {
 
 const errorHandler = (err, req, res, next) => {
   if (err.message.includes("Cast to ObjectId failed for value")) {
-    return res.status(400).json({
+    return res.status(404).json({
       message: "id is invalid",
     });
   }

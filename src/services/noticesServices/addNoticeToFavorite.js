@@ -1,10 +1,14 @@
 const { HttpError } = require('../../helpers/errors')
 const { User } = require('../../models/usersModel')
-
-
+const { Notice } = require('../../models/noticesModel');
+const { isValidObjectId } = require('mongoose');
 
 const addNoticeToFavorite = async (noticeId, userId) => {
-  console.log(userId, noticeId);
+  
+  if (!isValidObjectId(noticeId)) {
+    throw new HttpError(404, `no ads found with id: ${noticeId}`)
+  }
+
   const updatedUser = await User.findOneAndUpdate(
     { _id: userId },
     { $addToSet: { favoriteNotices: noticeId } },
