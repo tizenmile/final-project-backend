@@ -13,8 +13,6 @@ const {
 } = require("../../middlewares/updateUseerValidation");
 // const validation = require("../../middlewares/validation");
 const { auth } = require("../../middlewares/auth");
-const { authMiddleware } = require("../../middlewares/authTest");
-const { joiLoginSchema } = require("../../models/usersModel");
 const fileUploadMiddleware = require("../../middlewares/uploadMiddleware");
 
 const router = new express.Router();
