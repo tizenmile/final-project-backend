@@ -3,7 +3,7 @@ const Joi = require("joi");
 const updateUserValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .email({ tlds: { allow: false } })
+      .email()
       .min(10)
       .max(63)
       .pattern(
