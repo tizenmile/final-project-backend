@@ -9,8 +9,7 @@ const auth = asyncHandler(async (req, res, next) => {
     const [tokenType, token] = req.headers.authorization.split(" ");
 
     if (!token || tokenType !== "Bearer") {
-      res.status(400);
-      throw new Error("No auth token provided");
+      return res.status(400).json({message: "No auth token provided"});
     }
     const decoded = jwt.verify(token, SECRET);
 
@@ -21,8 +20,7 @@ const auth = asyncHandler(async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(401);
-    throw new Error("Not authorizates");
+    return res.status(401).json({message: "Not authorizates"});
   }
 });
 module.exports = {
