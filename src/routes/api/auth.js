@@ -29,19 +29,19 @@ router.post("/login", validationLogin, tryCatchWrapper(ctrlUser.login));
 
 router.get(
   "/current",
-  authMiddleware,
+  tryCatchWrapper(auth),
   tryCatchWrapper(ctrlUser.currentUserController)
 );
 router.patch(
   "/update",
-  authMiddleware,
+  tryCatchWrapper(auth),
   updateUserValidation,
   tryCatchWrapper(ctrlUser.updateUserInfoController)
 );
 
 router.post(
   "/avatar",
-  authMiddleware,
+  tryCatchWrapper(auth),
   fileUploadMiddleware,
   tryCatchWrapper(ctrlUser.updateUserAvatarController)
 );
