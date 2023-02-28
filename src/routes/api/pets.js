@@ -2,8 +2,7 @@ const express = require("express");
 const { tryCatchWrapper } = require("../../helpers");
 const { auth } = require("../../middlewares/auth");
 const { validateBody } = require("../../middlewares/validateBody");
-
-const fileUploadMiddleware = require("../../middlewares/uploadMiddleware");
+const uploadCloud = require("../../middlewares/uploadMiddleware");
 const { petSchema } = require("../../services/schemas/pet");
 const { petsControllers } = require("../../controllers");
 
@@ -14,7 +13,7 @@ const router = express.Router();
 router.post(
   "/",
   auth,
-  fileUploadMiddleware,
+  uploadCloud.single("image"),
   validateBody(petSchema),
   tryCatchWrapper(addPet)
 );

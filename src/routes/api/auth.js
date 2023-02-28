@@ -1,9 +1,6 @@
 const express = require("express");
-
 const { tryCatchWrapper } = require("../../helpers");
-
 const ctrlUser = require("../../controllers/auth/");
-
 const {
   userValidation,
   validationLogin,
@@ -11,9 +8,8 @@ const {
 const {
   updateUserValidation,
 } = require("../../middlewares/updateUseerValidation");
-// const validation = require("../../middlewares/validation");
 const { auth } = require("../../middlewares/auth");
-const fileUploadMiddleware = require("../../middlewares/uploadMiddleware");
+const uploadCloud = require("../../middlewares/uploadMiddleware");
 
 const router = new express.Router();
 
@@ -30,9 +26,10 @@ router.get(
   tryCatchWrapper(auth),
   tryCatchWrapper(ctrlUser.currentUserController)
 );
+
 router.patch(
   "/update",
-  auth,
+  tryCatchWrapper(auth),
   updateUserValidation,
   tryCatchWrapper(ctrlUser.updateUserInfoController)
 );
@@ -40,7 +37,7 @@ router.patch(
 router.post(
   "/avatar",
   tryCatchWrapper(auth),
-  fileUploadMiddleware,
+  uploadCloud.single("image"),
   tryCatchWrapper(ctrlUser.updateUserAvatarController)
 );
 

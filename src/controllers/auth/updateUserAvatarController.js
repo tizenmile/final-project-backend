@@ -10,7 +10,7 @@ const updateUserAvatarController = async (req, res) => {
   const avatarURL = url;
   await User.findByIdAndUpdate(_id, { avatarURL });
 
-  res.status(200).json({
+  res.json({
     avatarURL,
   });
 };

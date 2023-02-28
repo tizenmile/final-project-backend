@@ -1,6 +1,4 @@
-const { v4 } = require("uuid");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const { SECRET } = process.env;
 
 const { Conflict } = require("../../helpers/errors");

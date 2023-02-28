@@ -19,14 +19,9 @@ const register = async (body) => {
     mobile,
   });
 
-  return user.save();
+  return await user.save();
 };
 
-// const login = async (email, password) => {
-//
-// };
-
 module.exports = {
-  register,
-  //   login
+  register
 };

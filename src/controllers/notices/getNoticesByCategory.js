@@ -2,8 +2,12 @@ const { noticesServices } = require("../../services");
 
 const getNoticesByCategoryController = async (reg, res) => {
   const { category: categoryName } = reg.params;
-  const notices = await noticesServices.getNoticeByCategory(categoryName);
-  res.json({ notices });
+  let { page, limit } = reg.query
+    if (limit) {
+        limit = parseInt(limit) > 8 ? 8 : parseInt(limit)
+    }
+  const data = await noticesServices.getNoticeByCategory(categoryName, page, limit);
+  res.json({ data });
 };
 
 module.exports = { getNoticesByCategoryController };
