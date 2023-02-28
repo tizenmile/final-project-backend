@@ -15,13 +15,10 @@ const updateUserValidation = (req, res, next) => {
     city: Joi.string().min(2).max(60),
     mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")),
   }).required();
-
   const { error } = schema.validate(req.body);
-
   if (error) {
     return res.status(400).json(error.message);
   }
-
   next();
 };
 

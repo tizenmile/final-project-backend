@@ -26,7 +26,6 @@ const userValidation = (req, res, next) => {
   if (error) {
     return next(new HttpError(error.message));
   }
-
   next();
 };
 
@@ -35,9 +34,7 @@ const validationLogin = (req, res, next) => {
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   });
-  
   const { error } = joiLoginSchema.validate(req.body);
-
     if (error) {
      return next(new HttpError(error.message));
     }

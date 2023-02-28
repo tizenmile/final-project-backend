@@ -39,7 +39,7 @@ const noticeSchema = new mongoose.Schema({
   },
   comments: {
     type: String,
-  }
+  },
 });
 
 const Notice = mongoose.model("Notice", noticeSchema);

@@ -1,4 +1,3 @@
-const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;

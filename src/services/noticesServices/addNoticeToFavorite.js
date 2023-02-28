@@ -1,7 +1,5 @@
-const { HttpError } = require('../../helpers/errors')
-const { User } = require('../../models/usersModel')
-
-
+const { HttpError } = require("../../helpers/errors");
+const { User } = require("../../models/usersModel");
 
 const addNoticeToFavorite = async (noticeId, userId) => {
   console.log(userId, noticeId);
@@ -9,14 +7,13 @@ const addNoticeToFavorite = async (noticeId, userId) => {
     { _id: userId },
     { $addToSet: { favoriteNotices: noticeId } },
     { new: true }
-  )
+  );
   if (!updatedUser) {
-    throw new HttpError(400, "something went wrong")
+    throw new HttpError(400, "something went wrong");
   }
-  return updatedUser
-}
+  return updatedUser;
+};
 
 module.exports = {
-    addNoticeToFavorite
-}
-
+  addNoticeToFavorite,
+};

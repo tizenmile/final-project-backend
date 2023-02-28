@@ -1,5 +1,4 @@
 const { currentUser } = require("../../services/user/currentUser");
-
 const currentUserController = async (req, res) => {
   const { _id } = req.user;
   const result = await currentUser(_id);

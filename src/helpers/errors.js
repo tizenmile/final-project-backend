@@ -5,10 +5,9 @@ class ApiFindPetError extends Error {
 }
 
 class Unauthorized extends ApiFindPetError {
-    constructor(message) {
-        super(message),
-        this.status = 401
-    }
+  constructor(message) {
+    super(message), (this.status = 401);
+  }
 }
 
 class UpdatedFavoriteStatusError extends ApiFindPetError {
@@ -16,9 +15,6 @@ class UpdatedFavoriteStatusError extends ApiFindPetError {
     super(message), (this.status = 404);
   }
 }
-
-//class ValidationError extends ApiFindPetError {
-//  }
 
 class Conflict extends ApiFindPetError {
   constructor(message) {

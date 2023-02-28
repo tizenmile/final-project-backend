@@ -28,14 +28,12 @@ const uploadCloud = multer({
 function fileUploadMiddleware(req, res, next) {
   uploadCloud(req, res, function (err) {
     if (err instanceof multer.MulterError) {
-      // A Multer error occurred when uploading
       if (err.code === "LIMIT_FILE_SIZE") {
         return res
           .status(400)
           .json({ error: "File size too large. Max size is 5MB" });
       }
     } else if (err) {
-      // An unknown error occurred when uploading
       return res.status(400).json({
         error: "Error uploading file.",
       });

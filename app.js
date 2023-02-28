@@ -24,7 +24,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 
-// app.use('/avatars', express.static('public/avatars'))
 app.use("/api/notices", noticesRouter);
 app.use("/api/pets", petsRouter);
 app.use("/api/static", staticRouter);
