@@ -11,7 +11,7 @@ const updateUserValidation = (req, res, next) => {
         /^[a-zA-Z0-9._][a-zA-Z0-9._-]{0,}[a-zA-Z0-9._-]{0,}[a-zA-Z0-9._]@([a-zA-Z0-9.-]+\.)+[a-zA-Z]{2,}$/
       ),
     name: Joi.string().min(2).max(16),
-    birthday: Joi.string().pattern(/^(\d{2})\.(\d{2})\.(\d{4})$/),
+    birthday: Joi.string().pattern(/^(\d{4})\-(\d{2})\-(\d{2})$/),
     city: Joi.string().min(2).max(60),
     mobile: Joi.string().pattern(new RegExp("^[+](380)[0-9]{9}$")),
   }).required();
