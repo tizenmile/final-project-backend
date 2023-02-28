@@ -14,11 +14,6 @@ const login = async (req, res, next) => {
 
   const user = await User.findOne({ email });
 
-  if (!user) {
-    res.status(404);
-    throw new Unauthorized("Invalid login or password");
-  }
-
   const isValidPassword = bcrypt.compareSync(password, user.password);
 
   if (!user || !isValidPassword) {
@@ -37,12 +32,7 @@ const login = async (req, res, next) => {
 
   await User.findByIdAndUpdate(user._id, { token });
 
-  res.status(201).json({
-    code: 201,
-    message: "Success",
-    token: token,
-    _id: user._id,
-  });
+  res.status(201).json({ code: 201, message: "Success", token: token, user: { email } });
 };
 
 module.exports = login;
