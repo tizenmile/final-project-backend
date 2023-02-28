@@ -1,6 +1,4 @@
-const { v4 } = require("uuid");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const { SECRET } = process.env;
 
 const { Conflict } = require("../../helpers/errors");
@@ -15,7 +13,7 @@ const registerUser = async (req, res, next) => {
     const user = await service.register(req.body);
 
     const payload = {
-      id: user._id,
+      _id: user._id,
     };
 
     const token = jwt.sign(payload, SECRET, { expiresIn: "10h" });
