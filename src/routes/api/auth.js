@@ -9,7 +9,7 @@ const {
   updateUserValidation,
 } = require("../../middlewares/updateUseerValidation");
 const { auth } = require("../../middlewares/auth");
-const uploadCloud = require("../../middlewares/uploadMiddleware");
+const fileUploadMiddleware = require("../../middlewares/uploadMiddleware");
 
 const router = new express.Router();
 
@@ -21,23 +21,19 @@ router.post(
 
 router.post("/login", validationLogin, tryCatchWrapper(ctrlUser.login));
 
-router.get(
-  "/current",
-  tryCatchWrapper(auth),
-  tryCatchWrapper(ctrlUser.currentUserController)
-);
+router.get("/current", auth, tryCatchWrapper(ctrlUser.currentUserController));
 
 router.patch(
   "/update",
-  tryCatchWrapper(auth),
+  auth,
   updateUserValidation,
   tryCatchWrapper(ctrlUser.updateUserInfoController)
 );
 
 router.post(
   "/avatar",
-  tryCatchWrapper(auth),
-  uploadCloud.single("image"),
+  auth,
+  fileUploadMiddleware,
   tryCatchWrapper(ctrlUser.updateUserAvatarController)
 );
 
