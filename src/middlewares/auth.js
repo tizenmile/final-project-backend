@@ -1,10 +1,8 @@
-const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/usersModel");
 const { SECRET } = process.env;
-const asyncHandler = require('express-async-handler')
 
-const auth = asyncHandler(async (req, res, next) => {
+const auth = async (req, res, next) => {
   try {
     const [tokenType, token] = req.headers.authorization.split(" ");
 
@@ -22,7 +20,7 @@ const auth = asyncHandler(async (req, res, next) => {
   } catch (error) {
     return res.status(401).json({message: "Not authorizates"});
   }
-});
+};
 module.exports = {
   auth,
 };

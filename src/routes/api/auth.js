@@ -1,9 +1,6 @@
 const express = require("express");
-
 const { tryCatchWrapper } = require("../../helpers");
-
 const ctrlUser = require("../../controllers/auth/");
-
 const {
   userValidation,
   validationLogin,
@@ -11,9 +8,7 @@ const {
 const {
   updateUserValidation,
 } = require("../../middlewares/updateUseerValidation");
-// const validation = require("../../middlewares/validation");
 const { auth } = require("../../middlewares/auth");
-const { joiLoginSchema } = require("../../models/usersModel");
 const uploadCloud = require("../../middlewares/uploadMiddleware");
 
 const router = new express.Router();
@@ -31,6 +26,7 @@ router.get(
   tryCatchWrapper(auth),
   tryCatchWrapper(ctrlUser.currentUserController)
 );
+
 router.patch(
   "/update",
   tryCatchWrapper(auth),
